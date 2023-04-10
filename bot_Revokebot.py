@@ -13,7 +13,7 @@ def check_sensetive(text):
             sensetive_list.append(line.replace("\n", ""))
     pre_seg_list = jieba.cut_for_search(text)
     seg_list = ",".join(pre_seg_list)
-    print(seg_list)
+    #print(seg_list)
     if any(element in seg_list for element in sensetive_list):  # 搜索引擎模式
         return True
     else:
