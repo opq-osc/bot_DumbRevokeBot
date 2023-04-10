@@ -1,6 +1,7 @@
 # encoding=utf-8
 import jieba
 import base64
+import ast
 from botoy import GroupMsg,Action,S
 from botoy import decorators as deco
 from botoy.collection import MsgTypes
@@ -29,6 +30,11 @@ def check_sensetive(text):
                 )
 def main(ctx=GroupMsg):
     msg = ctx.Content.strip()
+    if 'Content' in msg:
+        msgPre = ast.literal_eval(ctx.Content)
+        msg = msgPre.get('Content').strip()
+    if 'Content' not in msg and 'GroupPic' in msg:
+        return
     if check_sensetive(msg) == True:
         print("sensetive msg discover")
         Action(ctx.CurrentQQ).revokeGroupMsg(
